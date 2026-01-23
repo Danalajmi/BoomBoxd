@@ -1,0 +1,55 @@
+{%load static%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="{%static 'css/style.css'%}">
+  <title>{%block title%}{%endblock%}</title>
+</head>
+<body>
+<!-- nav -->
+<!-- Navbar -->
+<nav class="boombox-nav">
+  <div class="nav-wrapper container">
+
+    <!-- Logo -->
+    <a href="#" class="brand-logo">
+      <img src="{%static 'logo-text.png'%}" alt="BOOMBOXD" class="logo-img">
+    </a>
+
+    <!-- Left links -->
+    <ul class="left nav-links">
+  <li class="active nav-item"><a href="#">Home</a></li>
+  <li class="nav-item"><a href="#">Chat</a></li>
+  <li><a href="#">Make a mixtape</a></li>
+</ul>
+
+
+    <!-- Search -->
+    <div class="nav-search">
+      <input type="text" placeholder="Search">
+    </div>
+
+    <!-- Right icon -->
+    <ul class="right">
+      <li>
+        <a href="#" class="profile-btn">
+          <i class="material-icons">person</i>
+        </a>
+      </li>
+    </ul>
+
+  </div>
+</nav>
+
+
+
+{% block content %}
+{% endblock content %}
+
+
+</body>
+</html>
