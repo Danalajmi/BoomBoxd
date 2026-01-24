@@ -23,8 +23,10 @@
     <!-- Left links -->
     <ul class="left nav-links">
   <li class="active nav-item"><a href="#">Home</a></li>
+  {% if user.is_authenticated %}
   <li class="nav-item"><a href="#">Chat</a></li>
   <li><a href="#">Make a mixtape</a></li>
+  {%endif%}
 </ul>
 
 
@@ -35,16 +37,20 @@
 
     <!-- Right icon -->
     <ul class="right">
+  {% if user.is_authenticated %}
       <li>
         <a href="#" class="profile-btn">
           <i class="material-icons">person</i>
         </a>
       </li>
+      {%else%}
+      <li><a href="{%url 'signup'%}">Sign up</a></li>
+      <li><a href="{%url 'login'%}">Log in</a></li>
+      {%endif%}
     </ul>
 
   </div>
 </nav>
-
 
 
 {% block content %}
