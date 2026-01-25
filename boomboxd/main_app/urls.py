@@ -6,7 +6,9 @@ from . import views
 urlpatterns = [
     path('', views.home, name='home'),
     path('accounts/signup/', views.signup, name='signup'),
-    path('albums/', views.albums, name='albums'),
+    # path('albums/', views.albums, name='albums'),
     path('artists/', views.artists, name='arists'),
-    path('albums/<int:album_id>', views.albumDetail, name='album_detail')
+    path('albums/<int:album_id>', views.albumDetail, name='album_detail'),
+    path('Mixtape/new', views.createMixtape.as_view(), name='Create_mix'),
+    path('search/', views.search, name='search')
 ]

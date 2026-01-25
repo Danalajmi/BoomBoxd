@@ -7,7 +7,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link rel="stylesheet" href="{%static 'css/style.css'%}">
-  <title>{%block title%}{%endblock%}</title>
+  <title>BOOMBOXD {%block title%}{%endblock%}</title>
 </head>
 <body>
 <!-- nav -->
@@ -22,17 +22,20 @@
 
     <!-- Left links -->
     <ul class="left nav-links">
-  <li class="active nav-item"><a href="#">Home</a></li>
+  <li class="active nav-item"><a href="{%url 'home'%}">Home</a></li>
   {% if user.is_authenticated %}
   <li class="nav-item"><a href="#">Chat</a></li>
-  <li><a href="#">Make a mixtape</a></li>
+  <li><a href="{%url 'Create_mix'%}">Make a mixtape</a></li>
   {%endif%}
 </ul>
 
 
     <!-- Search -->
     <div class="nav-search">
-      <input type="text" placeholder="Search">
+      <form action="{%url 'search'%}" method="POST">
+        {% csrf_token %}
+        <input type="text" placeholder="Search" name="query">
+      </form>
     </div>
 
     <!-- Right icon -->

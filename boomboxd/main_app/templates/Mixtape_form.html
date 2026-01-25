@@ -1,0 +1,7 @@
+{% extends "base.html" %}
+{% block content %}
+<form action="{%url 'Create_mix'%}" method="POST">
+  {{form.as_p}}
+  <input type="submit" value="create mixtape" class='nav-item'>
+</form>
+{% endblock content %}

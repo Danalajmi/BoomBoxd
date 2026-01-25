@@ -1,1 +1,23 @@
 {% extends "base.html" %}
+{% block title %}{{album.title}}{% endblock title %}
+
+{% block content %}
+<div class="album-detail">
+  <div class="album-meta">
+    <img src="{{album.cover_xl}}" alt="{{album.title}}">
+    <h1>{{album.title}}</h1>
+    <h4>{{album.artist.name}}</h4>
+  </div>
+
+  <div class="track-list">
+    {% for track in album.tracks.data %}
+    <div class="track-row">
+      <p class="track-title">{{track.title}}</p>
+      {% comment %} TODO shows in sec fix this {% endcomment %}
+      <p class="track-duration">{{track.duration}}</p>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+
+{% endblock content %}

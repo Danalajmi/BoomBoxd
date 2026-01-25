@@ -248,3 +248,92 @@ body {
     grid-template-columns: repeat(2, 1fr);
   }
 }
+
+.album-detail {
+  max-width: 1120px;
+  margin: 32px auto;
+
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: 24px;
+
+  background: #0d1024;
+  border-radius: 16px;
+  padding: 20px;
+
+  box-shadow:
+    0 0 0 1px rgba(195, 150, 255, 0.25),
+    0 12px 28px rgba(0, 0, 0, 0.7);
+}
+
+.album-meta img {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+
+  border-radius: 12px;
+  margin-bottom: 12px;
+}
+
+.album-meta h1 {
+  font-size: 18px;
+  margin: 0;
+  line-height: 1.2;
+  color: #f4b6ff;
+}
+
+.album-meta h4 {
+  margin: 6px 0 0;
+  font-size: 14px;
+  font-weight: 500;
+  color: #c9a6ff;
+}
+
+.track-list {
+  background: #0b0e1a;
+  border-radius: 12px;
+  padding: 12px;
+
+  max-height: 420px;
+  overflow-y: auto;
+}
+
+.track-row {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 12px;
+
+  padding: 8px 10px;
+  border-radius: 8px;
+
+  font-size: 13px;
+  color: #f4b6ff;
+}
+
+.track-row:not(:last-child) {
+  margin-bottom: 4px;
+}
+
+.track-row:hover {
+  background: rgba(185, 108, 255, 0.18);
+}
+
+.track-title {
+  margin: 0;
+}
+
+.track-duration {
+  margin: 0;
+  color: #bfa8ff;
+  font-variant-numeric: tabular-nums;
+}
+
+@media (max-width: 800px) {
+  .album-detail {
+    grid-template-columns: 1fr;
+  }
+
+  .track-list {
+    max-height: none;
+  }
+}

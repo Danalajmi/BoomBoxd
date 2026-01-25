@@ -8,6 +8,9 @@ from django.views.generic import ListView, DetailView
 from django.http import HttpResponse
 from .models import *
 import os
+import os
+from dotenv import load_dotenv
+load_dotenv()
 import requests
 
 # Create your views here.
@@ -29,17 +32,17 @@ def signup(request):
 
 def home(request):
     avatar = request.user.profile.avatar
-    print(avatar)
-    return render(request, 'home.html', {'avatar': avatar})
+    data = albums(request)
+    return render(request, 'home.html', {'avatar': avatar, 'albums': data})
 
 
 def albums(request):
     # ! wheres 'all albums' end point?? https://api.deezer.com/chart/0/albums returns only one album
+    # TODO change /tracks to /albums, this is only for test or use spotify's api
     url = "https://api.deezer.com/chart/0/tracks"
     response = requests.get(url)
     data = response.json()
-
-    return render (request, 'top-albums.html', {'albums': data["data"]})
+    return (data['data'])
 
 
 # def albums(request):
@@ -55,7 +58,25 @@ def artists(request):
     return render (request, 'top-artists.html', {'artists': data["data"]})
 
 def albumDetail(request, album_id):
-    url = "https://api.deezer.com/album/{album_id}"
+    url = f"https://api.deezer.com/album/{album_id}"
     response = requests.get(url)
     data = response.json()
-    return render(request, 'album-detail.html', {'data': data})
+    return render(request, 'album-detail.html', {'album': data})
+
+class createMixtape(CreateView):
+    model = Mixtape
+    fields = ['title']
+    template_name = 'Mixtape_form.html'
+
+
+def search(request):
+    query = request.POST.get('query')
+
+    print(f'query:::',{request})
+    data = []
+    if query:
+        url = f"https://api.deezer.com/search?q={query}"
+        response = requests.get(url)
+        data = response.json()
+
+    return render(request, 'home.html', {'albums': data['data']})
