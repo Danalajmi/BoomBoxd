@@ -22,7 +22,7 @@
 
     <!-- Left links -->
     <ul class="left nav-links">
-  <li class="active nav-item"><a href="{%url 'home'%}">Home</a></li>
+  <li class="nav-item"><a href="{%url 'home'%}">Home</a></li>
   {% if user.is_authenticated %}
   <li class="nav-item"><a href="#">Chat</a></li>
   <li><a href="{%url 'Create_mix'%}">Make a mixtape</a></li>
@@ -34,7 +34,7 @@
     <div class="nav-search">
       <form action="{%url 'search'%}" method="POST">
         {% csrf_token %}
-        <input type="text" placeholder="Search" name="query">
+        <input type="text" placeholder="Search" name="query" value="{{query}}">
       </form>
     </div>
 

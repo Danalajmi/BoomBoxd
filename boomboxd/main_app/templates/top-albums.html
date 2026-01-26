@@ -3,11 +3,11 @@
 
   {% for album in albums %}
   <div class="album-card">
-    <a href="{%url 'album_detail' album.album.id%}">
-    <img src="{{album.album.cover_xl}}" alt="{{album.title}}">
-    <h1>{{album.title}}</h1>
+
+    <img src="{{album.images.0.url}}" alt="{{album.name}}">
+    <h1>{{album.name}}</h1>
   <p>{{album.artist.name}}</p>
-</a>
+
   </div>
   {% endfor %}
 </div>
