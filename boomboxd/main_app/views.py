@@ -40,62 +40,25 @@ def signup(request):
 
 def home(request):
     avatar = request.user.profile.avatar
-    data = albums(request)
+    tracks = topTracks(request)
+    return render(request, "home.html", {"avatar": avatar, "albums": tracks})
 
-    top_albums = sp.artist_albums("06HL4z0CvFAxyc27GXpf02")
-
-    return render(request, "home.html", {"avatar": avatar, "albums": top_albums['items']})
-
-
-def albums(request):
-    # ! wheres 'all albums' end point?? https://api.deezer.com/chart/0/albums returns only one album
-    # TODO change /tracks to /albums, this is only for test or use spotify's api
-    url = "https://api.deezer.com/chart/0/tracks"
-    response = requests.get(url)
-    data = response.json()
-    return data["data"]
-
-
-def allAlbums(request):
-    kwarg = "code"
-    key = request.GET.get(kwarg)
-
-    token = Token_Spotify.objects.filter(user=key)
-    print(key, "token")
-    playlist_id = "3cEYpjA9oz9GiPac4AsH4n"
-    endpoint = f"/playlist/{playlist_id}"
-    response = spotify_request(key, endpoint)
-    print(f"response : {response}")
-    return HttpResponse("hi")
-
-
-def artists(request):
-    url = "https://api.deezer.com/chart/0/artists"
-    response = requests.get(url)
-    data = response.json()
-
-    return render(request, "top-artists.html", {"artists": data["data"]})
-
+def topTracks(request):
+    playlist_id = '2Md6zqbq1Rb4akJ4HFugWd'
+    tracks = sp.playlist(playlist_id)
+    return tracks['tracks']['items']
 
 def albumDetail(request, album_id):
-    url = f"https://api.deezer.com/album/{album_id}"
-    response = requests.get(url)
-    data = response.json()
+    data = sp.album(album_id)
     return render(request, "album-detail.html", {"album": data})
 
+
+def search(request):
+    query = request.POST.get("query")
+    data = sp.search(q=query, type='album')
+    return render(request, "home.html", {"albums": data['albums']['items'], "query": query})
 
 class createMixtape(CreateView):
     model = Mixtape
     fields = ["title"]
     template_name = "Mixtape_form.html"
-
-
-def search(request):
-    query = request.POST.get("query")
-    data = []
-    if query:
-        url = f"https://api.deezer.com/search?q={query}"
-        response = requests.get(url)
-        data = response.json()
-
-    return render(request, "home.html", {"albums": data["data"], "query": query})

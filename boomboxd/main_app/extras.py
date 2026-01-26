@@ -80,10 +80,8 @@ def spotify_request(session_id, endpoint):
     token = check_token(session_id)
     headers = {'content-type': 'application/json', 'Authorization': 'Bearer '+ token.access_token}
     response = requests.get(BASE_URL + endpoint,{},  headers=headers)
-
     if response:
         print(response)
     else:
         response = response.get('https://naas.isalman.dev/no')
-
     return response.json()

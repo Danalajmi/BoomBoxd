@@ -4,17 +4,18 @@
 {% block content %}
 <div class="album-detail">
   <div class="album-meta">
-    <img src="{{album.cover_xl}}" alt="{{album.title}}">
-    <h1>{{album.title}}</h1>
-    <h4>{{album.artist.name}}</h4>
+    <img src="{{album.images.0.url}}" alt="{{album.name}}">
+    <h1>{{album.name}}</h1>
+    <h4>{{album.artists.0.name}}</h4>
   </div>
 
   <div class="track-list">
-    {% for track in album.tracks.data %}
+    {% for track in album.tracks.items %}
     <div class="track-row">
-      <p class="track-title">{{track.title}}</p>
-      {% comment %} TODO shows in sec fix this {% endcomment %}
-      <p class="track-duration">{{track.duration}}</p>
+
+      <p class="track-title">{{track.track_number}}. {{track.name}}</p>
+      {% comment %} TODO shows in msec fix this {% endcomment %}
+      <p class="track-duration">{{track.duration_ms}}</p>
     </div>
     {% endfor %}
   </div>
