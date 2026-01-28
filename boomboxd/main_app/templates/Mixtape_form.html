@@ -1,7 +1,15 @@
 {% extends "base.html" %}
 {% block content %}
 <form action="{%url 'Create_mix'%}" method="POST">
+  {% csrf_token %}
   {{form.as_p}}
+
   <input type="submit" value="create mixtape" class='nav-item'>
 </form>
+<form action="{%url 'search' 'track'%}" method="POST">
+        {% csrf_token %}
+        <input type="text" placeholder="Search" name="query" value="{{query}}">
+        <input type="submit" value="Look up">
+      </form>
+      {% include "song-list.html" %}
 {% endblock content %}

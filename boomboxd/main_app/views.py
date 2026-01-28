@@ -7,7 +7,6 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic import ListView, DetailView
 from django.http import HttpResponse, HttpResponseRedirect
 from .credentials import *
-from .extras import *
 from .models import *
 import os
 import spotipy
@@ -44,6 +43,7 @@ def home(request):
     return render(request, "home.html", {"avatar": avatar, "albums": tracks})
 
 def topTracks(request):
+    # top 20 tracks playlist id
     playlist_id = '2Md6zqbq1Rb4akJ4HFugWd'
     tracks = sp.playlist(playlist_id)
     return tracks['tracks']['items']
@@ -53,10 +53,13 @@ def albumDetail(request, album_id):
     return render(request, "album-detail.html", {"album": data})
 
 
-def search(request):
+def search(request, type):
     query = request.POST.get("query")
-    data = sp.search(q=query, type='album')
-    return render(request, "home.html", {"albums": data['albums']['items'], "query": query})
+    data = sp.search(q=query, type=type)
+    if type == 'album':
+        return render(request, "album-list.html", {"albums": data['albums']['items'], "query": query})
+    else:
+        return render(request, 'Mixtape_form.html', {'songs': data['tracks']['items']})
 
 class createMixtape(CreateView):
     model = Mixtape

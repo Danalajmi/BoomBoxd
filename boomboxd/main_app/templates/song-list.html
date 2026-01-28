@@ -1,0 +1,14 @@
+<div class="songs-container">
+  {% for song in songs %}
+  <div class="song-row">
+    <img src="{{song.album.images.0.url}}" alt="{{song.name}}">
+
+    <div class="song-meta">
+      <h1>{{song.name}}</h1>
+      <p>{{song.artists.0.name}}</p>
+    </div>
+
+    <button class="add-btn" aria-label="Add song">+</button>
+  </div>
+  {% endfor %}
+</div>
