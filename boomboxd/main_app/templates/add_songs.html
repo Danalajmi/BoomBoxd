@@ -3,7 +3,7 @@
 {% block content %}
 
 <!-- Search Songs -->
-  <form action="{% url 'searchTracks' %}" method="POST" class="search-form">
+  <form action="{% url 'mix-add' mix_id %}" method="POST" class="search-form">
     <h1>{{mixtape}}</h1>
     {% csrf_token %}
     <input

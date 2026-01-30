@@ -88,10 +88,13 @@ class createMixtape(LoginRequiredMixin, CreateView):
 
 @login_required
 def addSong(request, pk):
-    query = request.POST.get("query") or 'taylor'
-    songs = searchTracks(query)
-    print('here4')
-    return render(request, 'add_songs.html', {'songs': songs, "query": query, "mix_id": pk,})
+    query = request.POST.get("query")
+    if query:
+        songs = searchTracks(query)
+    else:
+        songs = []
+        query = ''
+    return render(request, 'add_songs.html', {'songs': songs, "query": query, "mix_id": pk})
 
 
 
