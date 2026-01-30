@@ -5,6 +5,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.forms import UserCreationForm
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic import ListView, DetailView
+from django.urls import reverse, reverse_lazy
 from django.http import HttpResponse, HttpResponseRedirect
 from .credentials import *
 from .models import *
@@ -38,9 +39,20 @@ def signup(request):
 
 
 def home(request):
-    avatar = request.user.profile.avatar
+
     tracks = topTracks(request)
-    return render(request, "home.html", {"avatar": avatar, "albums": tracks})
+    # fix this for logged out users
+    if request.user.is_authenticated:
+        mixtapes = Mixtape.objects.filter(creator = request.user).order_by('-pk')
+    else:
+        mixtapes = []
+    return render(request, "home.html", {"albums": tracks, 'mixtapes': mixtapes})
+
+
+@login_required
+def profile(request):
+    mixtapes = Mixtape.objects.filter(creator = request.user)
+    return render(request, 'profile.html', {'mixtapes': mixtapes})
 
 def topTracks(request):
     # top 20 tracks playlist id
@@ -48,6 +60,7 @@ def topTracks(request):
     tracks = sp.playlist(playlist_id)
     return tracks['tracks']['items']
 
+@login_required
 def albumDetail(request, album_id):
     data = sp.album(album_id)
     return render(request, "album-detail.html", {"album": data})
@@ -61,7 +74,27 @@ def search(request, type):
     else:
         return render(request, 'Mixtape_form.html', {'songs': data['tracks']['items']})
 
-class createMixtape(CreateView):
+class createMixtape(LoginRequiredMixin, CreateView):
     model = Mixtape
     fields = ["title"]
     template_name = "Mixtape_form.html"
+    success_url = reverse_lazy('home')
+
+    def form_valid(self, form):
+        form.instance.creator = self.request.user
+        return super().form_valid(form)
+
+
+@login_required
+def addSong(request):
+    song_id = request.POST.get('song_id')
+
+
+class UpdateMix(LoginRequiredMixin, UpdateView):
+    model = Mixtape
+    fields = ['tracks']
+    template_name = 'add_songs.html'
+
+class viewMix(LoginRequiredMixin, DetailView):
+    model = Mixtape
+    template_name = 'view-mix.html'

@@ -1,0 +1,12 @@
+{% load static %}
+
+<div class="mixtape-grid">
+  {% for mixtape in mixtapes %}
+  <a href="{%url 'mix-detail' mixtape.id%}">
+      <div class="mixtape-card">
+    <img src="{% static 'cassette.png' %}" alt="cassette">
+    <h3>{{ mixtape.title }}</h3>
+  </div>
+  </a>
+  {% endfor %}
+</div>

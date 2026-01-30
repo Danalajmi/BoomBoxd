@@ -1,5 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.urls import reverse
+
 
 # Create your models here.
 class Profile(models.Model):
@@ -16,9 +18,13 @@ class Song(models.Model):
 
 
 class Mixtape(models.Model):
-    title = models.TextField()
+    title = models.CharField()
     creator = models.ForeignKey(User, on_delete=models.CASCADE)
     tracks = models.ManyToManyField(Song)
+
+    def get_absolute_url(self):
+        return reverse('home')
+
 
 
 class Review(models.Model):

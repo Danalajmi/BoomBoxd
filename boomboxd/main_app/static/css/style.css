@@ -18,6 +18,34 @@ body {
   min-height: 100vh;
 }
 
+a{
+  text-decoration: none;
+}
+
+/* =========================
+   PAGE CONTAINER
+========================= */
+
+.page-container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 16px;
+}
+
+/* =========================
+   SECTION TITLES
+========================= */
+
+.title {
+  margin: 40px 0 20px;
+
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: 0.4px;
+
+  color: #f4b6ff;
+}
+
 
 /* =========================
    NAVBAR CONTAINER
@@ -43,6 +71,9 @@ body {
   gap: 20px;
 }
 
+ul {
+  list-style-type: none;
+}
 
 /* =========================
    LOGO
@@ -482,5 +513,227 @@ body {
   .add-btn {
     width: 24px;
     height: 24px;
+  }
+}
+
+
+/* =========================
+   PANEL
+========================= */
+
+.mixtape-panel {
+  max-width: 1100px;            /* ⬅ much wider */
+  margin: 48px auto;
+  padding: 32px 36px;           /* ⬅ more internal space */
+
+  background: linear-gradient(180deg, #0f1433, #0b0e1a);
+  border-radius: 20px;
+
+  box-shadow:
+    0 0 0 1px rgba(195, 150, 255, 0.22),
+    0 18px 48px rgba(0, 0, 0, 0.75);
+
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+/* =========================
+   CREATE MIXTAPE FORM
+========================= */
+
+.mixtape-form {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.mixtape-form label {
+  font-size: 14px;
+  font-weight: 600;
+  color: #d6b8ff;
+}
+
+.mixtape-form input[type="text"] {
+  height: 40px;                 /* ⬅ taller */
+  border-radius: 10px;
+  border: none;
+  padding: 0 14px;
+  font-size: 14px;
+}
+
+/* =========================
+   PRIMARY BUTTON
+========================= */
+
+.primary-btn {
+  align-self: flex-start;
+
+  height: 34px;
+  padding: 0 20px;
+
+  background: linear-gradient(180deg, #ff9adf, #b96cff);
+  color: #120015;
+
+  border: none;
+  border-radius: 10px;
+
+  font-size: 14px;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  box-shadow:
+    inset 0 1px 1px rgba(255, 255, 255, 0.3),
+    0 4px 0 #070914;
+}
+
+.primary-btn:active {
+  transform: translateY(2px);
+  box-shadow:
+    inset 0 2px 3px rgba(0, 0, 0, 0.5),
+    0 2px 0 #070914;
+}
+
+/* =========================
+   SEARCH FORM
+========================= */
+
+.search-form {
+  display: flex;
+  gap: 10px;
+}
+
+.search-form input {
+  flex: 1;
+  height: 34px;
+  border-radius: 18px;
+  border: none;
+  padding: 0 14px;
+  font-size: 13px;
+}
+
+.search-form button {
+  height: 34px;
+  padding: 0 18px;
+
+  background: #1a1d3f;
+  color: #f4b6ff;
+
+  border: none;
+  border-radius: 18px;
+
+  font-size: 13px;
+  font-weight: 500;
+
+  cursor: pointer;
+}
+
+.search-form button:hover {
+  background: #23276a;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 1200px) {
+  .mixtape-panel {
+    max-width: 95%;
+  }
+}
+/* =========================
+   MIXTAPE GRID
+========================= */
+
+.mixtape-grid {
+  max-width: 1100px;
+  margin: 48px auto;
+
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* ⬅ max 4 */
+  gap: 24px;
+
+  padding: 0 16px;
+}
+
+/* =========================
+   MIXTAPE CARD
+========================= */
+
+.mixtape-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+
+  background: linear-gradient(180deg, #15193f, #0b0e1a);
+  border-radius: 16px;
+  padding: 16px 14px;
+
+  box-shadow:
+    0 0 0 1px rgba(195, 150, 255, 0.25),
+    0 12px 28px rgba(0, 0, 0, 0.75);
+
+  transition:
+    transform 0.15s ease,
+    box-shadow 0.15s ease;
+}
+
+.mixtape-card:hover {
+  transform: translateY(-4px);
+}
+
+.mixtape-card:active {
+  transform: translateY(2px);
+}
+
+/* =========================
+   CASSETTE IMAGE
+========================= */
+
+.mixtape-card img {
+  width: 130px;
+  height: auto;
+
+  filter: drop-shadow(0 6px 8px rgba(0, 0, 0, 0.6));
+}
+
+/* =========================
+   TITLE
+========================= */
+
+.mixtape-card h3 {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 600;
+  color: #f4b6ff;
+  text-align: center;
+
+  max-width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 1024px) {
+  .mixtape-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 720px) {
+  .mixtape-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 420px) {
+  .mixtape-grid {
+    grid-template-columns: 1fr;
   }
 }

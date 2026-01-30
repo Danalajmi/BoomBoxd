@@ -1,0 +1,17 @@
+
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
+<!-- Search Songs -->
+  <form action="{% url 'search' 'track' %}" method="POST" class="search-form">
+    {% csrf_token %}
+    <input
+      type="text"
+      name="query"
+      placeholder="Search for songs"
+      value="{{ query }}"
+    >
+    <button type="submit">Search</button>
+  </form>
+
+  <!-- Results -->
+{% include "song-list.html" %}

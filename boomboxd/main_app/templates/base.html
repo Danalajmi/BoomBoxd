@@ -7,6 +7,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link rel="stylesheet" href="{%static 'css/style.css'%}">
+  <link rel="icon" type="image/x-icon" href="{% static 'logo-img.png' %}">
   <title>BOOMBOXD {%block title%}{%endblock%}</title>
 </head>
 <body>
@@ -42,10 +43,11 @@
     <ul class="right">
   {% if user.is_authenticated %}
       <li>
-        <a href="#" class="profile-btn">
+        <a href="{%url 'profile'%}" class="profile-btn">
           <i class="material-icons">person</i>
         </a>
       </li>
+
       {%else%}
       <li><a href="{%url 'signup'%}">Sign up</a></li>
       <li><a href="{%url 'login'%}">Log in</a></li>

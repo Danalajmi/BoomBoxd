@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>{{mixtape.title}}</h1>
+{% for song in tracks %}
+<p>{song}</p>
+
+{% endfor %}
+
+
+{% endblock content %}

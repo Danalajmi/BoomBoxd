@@ -3,5 +3,13 @@
 
 
 {% block content %}
+<div class="page-container">
+<h1 class="title">Hit cassettes</h1>
 {% include "top-albums.html" %}
+
+{% if user.is_authenticated %}
+<h1 class="title">My mixtapes</h1>
+{% include "mixtapes_list.html" %}
+{% endif %}
+</div>
 {% endblock content %}
