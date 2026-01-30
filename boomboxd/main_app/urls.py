@@ -9,7 +9,9 @@ urlpatterns = [
     path('accounts/signup/', views.signup, name='signup'),
     path('albums/<str:album_id>', views.albumDetail, name='album_detail'),
     path('Mixtapes/new', views.createMixtape.as_view(), name='Create_mix'),
-    path('search/<str:type>/', views.search, name='search'),
-    path('Mixtapes/<int:pk>/', views.viewMix.as_view(), name='mix-detail')
+    path('search/', views.searchAlbums, name='search'),
+    path('searchTracks/', views.searchTracks, name='searchTracks'),
+    path('Mixtapes/<int:pk>/', views.viewMix.as_view(), name='mix-detail'),
+    path('Mixtapes/<int:pk>/add', views.addSong, name='mix-add'),
 
 ]

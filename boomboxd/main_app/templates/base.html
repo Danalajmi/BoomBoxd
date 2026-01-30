@@ -33,9 +33,9 @@
 
     <!-- Search -->
     <div class="nav-search">
-      <form action="{%url 'search' 'album' %}" method="POST">
+      <form action="{%url 'search'%}" method="POST">
         {% csrf_token %}
-        <input type="text" placeholder="Search" name="query" value="{{query}}">
+        <input type="text" placeholder="Search albums" name="query" value="{{query}}">
       </form>
     </div>
 

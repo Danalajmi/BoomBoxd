@@ -6,7 +6,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic import ListView, DetailView
 from django.urls import reverse, reverse_lazy
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from .credentials import *
 from .models import *
 import os
@@ -66,19 +66,20 @@ def albumDetail(request, album_id):
     return render(request, "album-detail.html", {"album": data})
 
 
-def search(request, type):
+def searchTracks(query):
+    data = sp.search(q=query, type='track')
+    return data['tracks']['items']
+
+def searchAlbums(request):
     query = request.POST.get("query")
-    data = sp.search(q=query, type=type)
-    if type == 'album':
-        return render(request, "album-list.html", {"albums": data['albums']['items'], "query": query})
-    else:
-        return render(request, 'Mixtape_form.html', {'songs': data['tracks']['items']})
+    data = sp.search(q=query, type='album')
+    return render(request, "album-list.html", {"albums": data['albums']['items'], "query": query})
+
 
 class createMixtape(LoginRequiredMixin, CreateView):
     model = Mixtape
     fields = ["title"]
     template_name = "Mixtape_form.html"
-    success_url = reverse_lazy('home')
 
     def form_valid(self, form):
         form.instance.creator = self.request.user
@@ -86,14 +87,19 @@ class createMixtape(LoginRequiredMixin, CreateView):
 
 
 @login_required
-def addSong(request):
-    song_id = request.POST.get('song_id')
+def addSong(request, pk):
+    query = request.POST.get("query") or 'taylor'
+    songs = searchTracks(query)
+    print('here4')
+    return render(request, 'add_songs.html', {'songs': songs, "query": query, "mix_id": pk,})
+
 
 
 class UpdateMix(LoginRequiredMixin, UpdateView):
     model = Mixtape
     fields = ['tracks']
     template_name = 'add_songs.html'
+
 
 class viewMix(LoginRequiredMixin, DetailView):
     model = Mixtape

@@ -1,8 +1,10 @@
 
-{% load static %}
-<link rel="stylesheet" href="{% static 'css/style.css' %}">
+{% extends "base.html" %}
+{% block content %}
+
 <!-- Search Songs -->
-  <form action="{% url 'search' 'track' %}" method="POST" class="search-form">
+  <form action="{% url 'searchTracks' %}" method="POST" class="search-form">
+    <h1>{{mixtape}}</h1>
     {% csrf_token %}
     <input
       type="text"
@@ -10,8 +12,11 @@
       placeholder="Search for songs"
       value="{{ query }}"
     >
+
     <button type="submit">Search</button>
   </form>
 
-  <!-- Results -->
+
 {% include "song-list.html" %}
+
+{% endblock content %}

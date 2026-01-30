@@ -23,7 +23,8 @@ class Mixtape(models.Model):
     tracks = models.ManyToManyField(Song)
 
     def get_absolute_url(self):
-        return reverse('home')
+        return reverse("mix-add", kwargs={"pk": self.pk})
+
 
 
 
