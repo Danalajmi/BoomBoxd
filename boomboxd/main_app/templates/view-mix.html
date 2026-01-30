@@ -1,10 +1,7 @@
 {% extends "base.html" %}
 {% block content %}
 <h1>{{mixtape.title}}</h1>
-{% for song in tracks %}
-<p>{song}</p>
-
-{% endfor %}
-
 <a href="{%url 'mix-add' mixtape.id%}" class="primary-btn">Add songs</a>
+{% include "song-list.html" %}
+
 {% endblock content %}

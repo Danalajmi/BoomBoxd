@@ -14,6 +14,7 @@ class Profile(models.Model):
 
 
 class Song(models.Model):
+    id = models.CharField(primary_key=True)
     title = models.CharField()
 
 

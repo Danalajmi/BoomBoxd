@@ -4,19 +4,35 @@
 
 <!-- Search Songs -->
   <form action="{% url 'mix-add' mix_id %}" method="POST" class="search-form">
-    <h1>{{mixtape}}</h1>
     {% csrf_token %}
     <input
       type="text"
-      name="query"
+      name="queryTrack"
       placeholder="Search for songs"
-      value="{{ query }}"
+      value="{{ queryTrack }}"
     >
 
     <button type="submit">Search</button>
   </form>
 
 
-{% include "song-list.html" %}
+<form action="{%url 'song-add' mix_id%}" method="POST">
+  {% csrf_token %}
+  <div class="songs-container">
+  {% for song in songs %}
+  <div class="song-row">
+    <img src="{{song.album.images.0.url}}" alt="{{song.album.name}}">
+
+    <div class="song-meta">
+      <h1>{{song.name}}</h1>
+      <p>{{song.artists.0.name}}</p>
+    </div>
+
+    <button class="add-btn" aria-label="Add song" value="{{song.id}}" name="song_id" type="submit">+</button>
+  </div>
+  {% endfor %}
+</div>
+
+</form>
 
 {% endblock content %}

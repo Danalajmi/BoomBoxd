@@ -41,7 +41,6 @@ def signup(request):
 def home(request):
 
     tracks = topTracks(request)
-    # fix this for logged out users
     if request.user.is_authenticated:
         mixtapes = Mixtape.objects.filter(creator = request.user).order_by('-pk')
     else:
@@ -87,14 +86,15 @@ class createMixtape(LoginRequiredMixin, CreateView):
 
 
 @login_required
-def addSong(request, pk):
-    query = request.POST.get("query")
+def lookup(request, pk):
+    # ! this searches for a track not adding lol
+    query = request.POST.get("queryTrack")
     if query:
         songs = searchTracks(query)
     else:
         songs = []
         query = ''
-    return render(request, 'add_songs.html', {'songs': songs, "query": query, "mix_id": pk})
+    return render(request, 'add_songs.html', {'songs': songs, "queryTrack": query, "mix_id": pk})
 
 
 
@@ -104,6 +104,18 @@ class UpdateMix(LoginRequiredMixin, UpdateView):
     template_name = 'add_songs.html'
 
 
-class viewMix(LoginRequiredMixin, DetailView):
-    model = Mixtape
-    template_name = 'view-mix.html'
+def mixDetail(request, pk):
+    mixtape = Mixtape.objects.get(id = pk)
+    songs = []
+    for song in mixtape.tracks.all():
+        title = sp.track(song.id)
+        songs.append(title)
+
+    return render(request, 'view-mix.html', {'mixtape': mixtape, 'songs': songs})
+
+@login_required
+def songAdd(request, pk):
+    song_id, _ = Song.objects.get_or_create(id = request.POST.get('song_id'))
+    mixTape = Mixtape.objects.get(id = pk)
+    mixTape.tracks.add(song_id)
+    return redirect('mix-detail', pk = mixTape.id)
