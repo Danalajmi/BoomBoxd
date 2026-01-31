@@ -22,19 +22,37 @@
   </div>
 </div>
 
-<div class="review-section">
+<div class="reviews-section">
 
-<h1>Thoughts</h1>
-<button class="primary-btn"><a href="{%url 'createReview' album.id %}"><i class="material-icons">add</i></a></button>
+  <div class="reviews-header">
+    <h1>Thoughts</h1>
 
-{% for review in reviews %}
-<h1>{{review.rating}}/5</h1>
-<p>{{review.content}}</p>
-<div>
-  <p>Favourite track: {{review.fav}}</p>
-  <p>Honourable mention: {{review.mention}}</p>
-  <p>least Favourite track: {{review.least}}</p>
+    <a href="{% url 'createReview' album.id %}" class="primary-btn icon-btn">
+      <i class="material-icons">add</i>
+    </a>
+  </div>
+
+  <div class="reviews-grid">
+    {% for review in reviews %}
+    <div class="review-card">
+
+      <div class="review-top">
+        <p class="review-user">{{ review.user }}</p>
+        <span class="review-rating">{{ review.rating }}/5</span>
+      </div>
+
+      <p class="review-content">{{ review.content }}</p>
+
+      <div class="review-tracks">
+        <p><strong>Favourite:</strong> {{ review.fav }}</p>
+        <p><strong>Honourable:</strong> {{ review.mention }}</p>
+        <p><strong>Least:</strong> {{ review.least }}</p>
+      </div>
+
+    </div>
+    {% endfor %}
+  </div>
+
 </div>
-{% endfor %}
-</div>
+
 {% endblock content %}

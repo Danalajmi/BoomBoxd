@@ -737,3 +737,151 @@ ul {
     grid-template-columns: 1fr;
   }
 }
+
+
+
+
+/* =========================
+   REVIEWS SECTION
+========================= */
+
+.reviews-section {
+  margin-top: 48px;
+}
+
+/* =========================
+   HEADER
+========================= */
+
+.reviews-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.reviews-header h1 {
+  margin: 0;
+  font-size: 22px;
+  font-weight: 700;
+  color: #f4b6ff;
+}
+
+/* =========================
+   ICON BUTTON
+========================= */
+
+.icon-btn {
+  width: 34px;
+  height: 34px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  text-decoration: none;
+
+  background: linear-gradient(180deg, #ff9adf, #b96cff);
+  color: #120015;
+
+  border-radius: 10px;
+
+  box-shadow:
+    inset 0 1px 1px rgba(255, 255, 255, 0.3),
+    0 4px 0 #070914;
+
+  transition:
+    transform 0.12s ease,
+    box-shadow 0.12s ease;
+}
+
+.icon-btn i {
+  font-size: 20px;
+}
+
+.icon-btn:active {
+  transform: translateY(2px);
+  box-shadow:
+    inset 0 2px 3px rgba(0, 0, 0, 0.5),
+    0 2px 0 #070914;
+}
+
+/* =========================
+   GRID
+========================= */
+
+.reviews-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+/* =========================
+   REVIEW CARD
+========================= */
+
+.review-card {
+  background: linear-gradient(180deg, #15193f, #0b0e1a);
+  border-radius: 16px;
+  padding: 16px 18px;
+
+  box-shadow:
+    0 0 0 1px rgba(195, 150, 255, 0.25),
+    0 10px 24px rgba(0, 0, 0, 0.75);
+
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* =========================
+   CARD CONTENT
+========================= */
+
+.review-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.review-user {
+  font-size: 13px;
+  font-weight: 600;
+  color: #c9a6ff;
+  margin: 0;
+}
+
+.review-rating {
+  font-size: 13px;
+  font-weight: 700;
+  color: #ff9adf;
+}
+
+.review-content {
+  font-size: 13px;
+  line-height: 1.4;
+  color: #f4b6ff;
+  margin: 4px 0;
+}
+
+.review-tracks p {
+  margin: 2px 0;
+  font-size: 12px;
+  color: #c9a6ff;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 1024px) {
+  .reviews-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .reviews-grid {
+    grid-template-columns: 1fr;
+  }
+}

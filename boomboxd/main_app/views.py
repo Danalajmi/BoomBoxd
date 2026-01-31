@@ -127,23 +127,13 @@ def songAdd(request, pk):
     return redirect('mix-detail', pk = mixTape.id)
 
 
-
-# class createReview(LoginRequiredMixin, CreateView):
-#     model= Review
-#     fields = ['content', 'rating', 'date']
-#     template_name = 'reviews_form.html'
-#     success_url = 'home'
-
 def createReview(request, album_id):
     form = ReviewForm(request.POST)
 
     albumTracks = sp.album_tracks(album_id)
     if request.method == "POST":
-
         form = ReviewForm(request.POST)
-        print(form.errors)
         if form.is_valid():
-
             review = form.save(commit=False)
             review.album, _ = Album.objects.get_or_create(id = album_id)
             review.user = request.user
