@@ -22,4 +22,19 @@
   </div>
 </div>
 
+<div class="review-section">
+
+<h1>Thoughts</h1>
+<button class="primary-btn"><a href="{%url 'createReview' album.id %}"><i class="material-icons">add</i></a></button>
+
+{% for review in reviews %}
+<h1>{{review.rating}}/5</h1>
+<p>{{review.content}}</p>
+<div>
+  <p>Favourite track: {{review.fav}}</p>
+  <p>Honourable mention: {{review.mention}}</p>
+  <p>least Favourite track: {{review.least}}</p>
+</div>
+{% endfor %}
+</div>
 {% endblock content %}

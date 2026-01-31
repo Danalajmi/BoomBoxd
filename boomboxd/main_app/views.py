@@ -7,8 +7,10 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic import ListView, DetailView
 from django.urls import reverse, reverse_lazy
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
+from django.utils import timezone
 from .credentials import *
 from .models import *
+from .forms import *
 import os
 import spotipy
 from spotipy.oauth2 import SpotifyOAuth, SpotifyClientCredentials
@@ -62,7 +64,8 @@ def topTracks(request):
 @login_required
 def albumDetail(request, album_id):
     data = sp.album(album_id)
-    return render(request, "album-detail.html", {"album": data})
+    reviews = Review.objects.filter(album = album_id)
+    return render(request, "album-detail.html", {"album": data, 'reviews': reviews})
 
 
 def searchTracks(query):
@@ -87,7 +90,7 @@ class createMixtape(LoginRequiredMixin, CreateView):
 
 @login_required
 def lookup(request, pk):
-    # ! this searches for a track not adding lol
+
     query = request.POST.get("queryTrack")
     if query:
         songs = searchTracks(query)
@@ -118,4 +121,35 @@ def songAdd(request, pk):
     song_id, _ = Song.objects.get_or_create(id = request.POST.get('song_id'))
     mixTape = Mixtape.objects.get(id = pk)
     mixTape.tracks.add(song_id)
+
+    # TODO: change to this: return redirect('song-add', pk = mixTape.id) raises err idk why
+    #! duplicate key value violates unique constraint "main_app_song_pkey", line 118 returns None??
     return redirect('mix-detail', pk = mixTape.id)
+
+
+
+# class createReview(LoginRequiredMixin, CreateView):
+#     model= Review
+#     fields = ['content', 'rating', 'date']
+#     template_name = 'reviews_form.html'
+#     success_url = 'home'
+
+def createReview(request, album_id):
+    form = ReviewForm(request.POST)
+
+    albumTracks = sp.album_tracks(album_id)
+    if request.method == "POST":
+
+        form = ReviewForm(request.POST)
+        print(form.errors)
+        if form.is_valid():
+
+            review = form.save(commit=False)
+            review.album, _ = Album.objects.get_or_create(id = album_id)
+            review.user = request.user
+            review.date = timezone.now()
+            review.save()
+            return redirect('album_detail', album_id= album_id)
+
+    return render(request, 'reviews_form.html', {'album_id': album_id, 'form': form, 'albumTracks': albumTracks['items']})
+

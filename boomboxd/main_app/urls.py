@@ -14,5 +14,6 @@ urlpatterns = [
     path('Mixtapes/<int:pk>/', views.mixDetail, name='mix-detail'),
     path('Mixtapes/<int:pk>/add', views.lookup, name='mix-add'),
     path('Mixtapes/<int:pk>/addSong', views.songAdd, name='song-add'),
+    path('reviews/<str:album_id>/add/', views.createReview, name='createReview')
 
 ]

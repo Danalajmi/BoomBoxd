@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.urls import reverse
+from django.core.validators import MinValueValidator, MaxValueValidator
 
 
 # Create your models here.
@@ -15,7 +16,7 @@ class Profile(models.Model):
 
 class Song(models.Model):
     id = models.CharField(primary_key=True)
-    title = models.CharField()
+
 
 
 class Mixtape(models.Model):
@@ -26,14 +27,17 @@ class Mixtape(models.Model):
     def get_absolute_url(self):
         return reverse("mix-add", kwargs={"pk": self.pk})
 
+class Album(models.Model):
+    id = models.CharField(primary_key=True)
 
 
 
 class Review(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     content = models.TextField()
-    rating = models.CharField()
-    date = models.DateField()
+    rating = models.IntegerField(validators=[MinValueValidator(0), MaxValueValidator(5)])
+    date = models.DateField(null=True, blank=True)
+    album = models.ForeignKey(Album, on_delete=models.CASCADE, related_name='album', blank=True)
     fav = models.ForeignKey(Song, on_delete=models.CASCADE, related_name='fav')
     least = models.ForeignKey(Song, on_delete=models.CASCADE, related_name='least')
     mention = models.ForeignKey(Song, on_delete=models.CASCADE, related_name='mention')
