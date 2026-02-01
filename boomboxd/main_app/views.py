@@ -146,6 +146,15 @@ def songAdd(request, pk):
     #! duplicate key value violates unique constraint "main_app_song_pkey", line 118 returns None??
     return redirect("mix-detail", pk=mixTape.id)
 
+@login_required
+def songRemove(request,pk):
+    song_id = Song.objects.get(id=request.POST.get("song_id"))
+
+    mixTape = Mixtape.objects.get(id=pk)
+    mixTape.tracks.remove(song_id)
+
+    return redirect("mix-detail", pk=mixTape.id)
+
 
 def createReview(request, album_id):
     form = ReviewForm(request.POST)

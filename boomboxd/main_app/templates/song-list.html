@@ -8,6 +8,14 @@
       <p>{{song.artists.0.name}}</p>
     </div>
 
+    <form action="{%url 'remove_song' %}">
+      <button
+  aria-label="remove song"
+  value="{{ song.id }}"
+  id="song_id"
+  type="submit"
+  class="remove-btn">−</button>
+    </form>
   </div>
   {% endfor %}
 </div>

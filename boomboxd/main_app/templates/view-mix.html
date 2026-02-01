@@ -9,7 +9,30 @@
 </div>
 
 
-  {% include "song-list.html" %}
+<div class="songs-container">
+  {% for song in songs %}
+  <div class="song-row">
+    <img src="{{song.album.images.0.url}}" alt="{{song.album.name}}">
+
+    <div class="song-meta">
+      <h1>{{song.name}}</h1>
+      <p>{{song.artists.0.name}}</p>
+    </div>
+
+    <form action="{%url 'remove_song' mixtape.id %}" method="POST">
+      {% csrf_token %}
+      <button
+  aria-label="remove song"
+  value="{{ song.id }}"
+  name="song_id"
+
+  type="submit"
+  class="remove-btn">−</button>
+    </form>
+  </div>
+  {% endfor %}
+</div>
+
 
 
 {% endblock content %}
