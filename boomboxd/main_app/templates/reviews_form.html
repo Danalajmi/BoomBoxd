@@ -13,7 +13,7 @@
       <label for="{{form.fav.id_for_label}}">Favourite song: </label>
   <select name="{{form.fav.name}}" id="{{form.fav.id_for_label}}">
     {% for track in albumTracks %}
-    <option value="{{track.id}}">{{track.name}}</option>
+    <option value="{{track.name}}">{{track.name}}</option>
     {% endfor %}
   </select>
   </div>
@@ -22,7 +22,7 @@
       <label for="{{form.mention.id_for_label}}">Honourable mention song</label>
   <select name="{{form.mention.name}}" id="{{form.mention.id_for_label}}">
     {% for track in albumTracks %}
-    <option value="{{track.id}}">{{track.name}}</option>
+    <option value="{{track.name}}">{{track.name}}</option>
     {% endfor %}
   </select>
   </div>
@@ -31,7 +31,7 @@
       <label for="{{form.least.id_for_label}}">Least Favourite song (even if it's tough to choose)</label>
   <select name="{{form.least.name}}" id="{{form.least.id_for_label}}">
     {% for track in albumTracks %}
-    <option value="{{track.id}}">{{track.name}}</option>
+    <option value="{{track.name}}">{{track.name}}</option>
     {% endfor %}
   </select>
   </div>

@@ -4,6 +4,7 @@
 
   <h1 class="title">{{mixtape.title}}</h1>
   <a href="{%url 'mix-add' mixtape.id%}" class="primary-btn">Add songs</a>
+  <a href="{%url 'mix-update' mixtape.id%}" class="primary-btn">Edit title</a>
   {% include "song-list.html" %}
 
 
