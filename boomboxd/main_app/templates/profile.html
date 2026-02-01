@@ -7,6 +7,34 @@
 </form>
 <h1 class="title">My awesome mixtapes</h1>
 {% include "mixtapes_list.html" %}
-<h1 class="title">My Reviews</h1>
+<div class="reviews-section">
 
+  <div class="reviews-header">
+    <h1 class="title">My Reviews</h1>
+
+
+
+  </div>
+
+  <div class="reviews-grid">
+    {% for review in reviews %}
+    <div class="review-card">
+
+      <div class="review-top">
+        <p class="review-user">{{ review.album }}</p>
+        <span class="review-rating">{{ review.rating }}/5</span>
+      </div>
+
+
+      <p class="review-content">{{ review.content }}</p>
+
+      <div class="review-tracks">
+        <p><strong>Favourite:</strong> {{ review.fav }}</p>
+        <p><strong>Honourable:</strong> {{ review.mention }}</p>
+        <p><strong>Least:</strong> {{ review.least }}</p>
+      </div>
+
+    </div>
+    {% endfor %}
+  </div>
 {% endblock content %}

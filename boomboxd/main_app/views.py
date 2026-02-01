@@ -56,7 +56,8 @@ def home(request):
 @login_required
 def profile(request):
     mixtapes = Mixtape.objects.filter(creator=request.user)
-    return render(request, "profile.html", {"mixtapes": mixtapes})
+    reviews = Review.objects.filter(user = request.user)
+    return render(request, "profile.html", {"mixtapes": mixtapes, 'reviews': reviews})
 
 
 def topTracks(request):
@@ -120,6 +121,9 @@ class UpdateMix(LoginRequiredMixin, UpdateView):
     model = Mixtape
     fields = ["tracks"]
     template_name = "add_songs.html"
+    def get_success_url(self):
+        return reverse('mix-detail', pk=self.object.pk)
+
 
 
 def mixDetail(request, pk):
@@ -147,12 +151,9 @@ def createReview(request, album_id):
     form = ReviewForm(request.POST)
 
     albumTracks = sp.album_tracks(album_id)
-    print(form.errors)
-    print(request.POST)
     if request.method == "POST":
         form = ReviewForm(request.POST)
         if form.is_valid():
-
             review = form.save(commit=False)
             review.album, _ = Album.objects.get_or_create(id=album_id)
             review.user = request.user

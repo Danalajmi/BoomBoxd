@@ -1,6 +1,21 @@
 {% extends "base.html" %}
 
 {% block content %}
+{% if object %}
+<div class="mixtape-panel">
+  <!-- Create Mixtape -->
+  <form action="{% url 'mix-update' object.id %}" method="POST" class="mixtape-form">
+    {% csrf_token %}
+    <label for="id_title">{{object.name}}</label>
+    {{ form.title }}
+
+    <button type="submit" class="primary-btn">
+      Update title
+    </button>
+  </form>
+
+</div>
+{% else  %}
 <div class="mixtape-panel">
   <!-- Create Mixtape -->
   <form action="{% url 'Create_mix' %}" method="POST" class="mixtape-form">
@@ -14,4 +29,5 @@
   </form>
 
 </div>
+{% endif %}
 {% endblock content %}

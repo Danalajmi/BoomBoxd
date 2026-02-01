@@ -1,44 +1,51 @@
 {% extends "base.html" %}
 {% block content %}
-<form action="{%url 'createReview' album_id %}" method="POST">
-  {% csrf_token %}
 
-  <label for="{{form.rating.id_for_label}}">Rate the album /5</label>
-  {{form.rating}}
-  <hr>
+<div class="review-form-wrapper">
+  <form action="{% url 'createReview' album_id %}" method="POST" class="review-form">
+    {% csrf_token %}
 
-  {{form.content}}
+    <label>Rate the album</label>
+    <div class="star-rating">
+      {% for i in "54321" %}
+      <input type="radio" name="rating" id="star{{ i }}" value="{{ i }}">
+      <label for="star{{ i }}">★</label>
+      {% endfor %}
+    </div>
 
-  <div class="select-song">
-      <label for="{{form.fav.id_for_label}}">Favourite song: </label>
-  <select name="{{form.fav.name}}" id="{{form.fav.id_for_label}}">
-    {% for track in albumTracks %}
-    <option value="{{track.name}}">{{track.name}}</option>
-    {% endfor %}
-  </select>
-  </div>
 
-  <div class="select-song">
-      <label for="{{form.mention.id_for_label}}">Honourable mention song</label>
-  <select name="{{form.mention.name}}" id="{{form.mention.id_for_label}}">
-    {% for track in albumTracks %}
-    <option value="{{track.name}}">{{track.name}}</option>
-    {% endfor %}
-  </select>
-  </div>
 
-  <div class="select-song">
-      <label for="{{form.least.id_for_label}}">Least Favourite song (even if it's tough to choose)</label>
-  <select name="{{form.least.name}}" id="{{form.least.id_for_label}}">
-    {% for track in albumTracks %}
-    <option value="{{track.name}}">{{track.name}}</option>
-    {% endfor %}
-  </select>
-  </div>
+  <textarea name="content"></textarea>
 
-  <input type="submit" value="Add Review">
+    <div class="select-song">
+      <label for="{{form.fav.id_for_label}}">Favourite song</label>
+      <select name="{{form.fav.name}}" id="{{form.fav.id_for_label}}">
+        {% for track in albumTracks %}
+        <option value="{{track.name}}">{{track.name}}</option>
+        {% endfor %}
+      </select>
+    </div>
 
-</form>
+    <div class="select-song">
+      <label for="{{form.mention.id_for_label}}">Honourable mention</label>
+      <select name="{{form.mention.name}}" id="{{form.mention.id_for_label}}">
+        {% for track in albumTracks %}
+        <option value="{{track.name}}">{{track.name}}</option>
+        {% endfor %}
+      </select>
+    </div>
+
+    <div class="select-song">
+      <label for="{{form.least.id_for_label}}">Least favourite song</label>
+      <select name="{{form.least.name}}" id="{{form.least.id_for_label}}">
+        {% for track in albumTracks %}
+        <option value="{{track.name}}">{{track.name}}</option>
+        {% endfor %}
+      </select>
+    </div>
+
+    <input type="submit" value="Add Review">
+  </form>
+</div>
+
 {% endblock content %}
-
-

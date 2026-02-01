@@ -3,8 +3,12 @@
 
 
   <h1 class="title">{{mixtape.title}}</h1>
-  <a href="{%url 'mix-add' mixtape.id%}" class="primary-btn">Add songs</a>
-  <a href="{%url 'mix-update' mixtape.id%}" class="primary-btn">Edit title</a>
+<div class="mix-actions">
+  <a href="{% url 'mix-add' mixtape.id %}" class="mix-action">Add songs</a>
+  <a href="{% url 'mix-update' mixtape.id %}" class="mix-action secondary">Edit title</a>
+</div>
+
+
   {% include "song-list.html" %}
 
 
