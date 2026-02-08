@@ -22,6 +22,8 @@
 
       <div class="review-top">
         <p class="review-user">{{ review.album }}</p>
+        <a href="{%url 'deleteReview' 'profile'%}">Delete review</a>
+        {% block confirm %}{% endblock confirm %}
         <span class="review-rating">{{ review.rating }}/5</span>
       </div>
 

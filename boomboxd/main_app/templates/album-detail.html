@@ -38,6 +38,8 @@
 
       <div class="review-top">
         <p class="review-user">{{ review.user }}</p>
+        <a href="{%url 'deleteReview' album.id 'detail' review.id%}"><i class="material-icons">delete</i></a>
+        {% block confirm %}{% endblock confirm %}
         <span class="review-rating">{{ review.rating }}/5</span>
       </div>
 
@@ -45,7 +47,7 @@
 
       <div class="review-tracks">
         <p><strong>Favourite:</strong> {{ review.fav }}</p>
-        <p><strong>Honourable:</strong> {{ review.mention }}</p>
+        <p><strong>Honourable mention:</strong> {{ review.mention }}</p>
         <p><strong>Least:</strong> {{ review.least }}</p>
       </div>
 

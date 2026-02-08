@@ -14,8 +14,10 @@ urlpatterns = [
     path('search/', views.searchAlbums, name='search'),
     path('searchTracks/', views.searchTracks, name='searchTracks'),
     path('Mixtapes/<int:pk>/', views.mixDetail, name='mix-detail'),
+    path('Mixtapes/<int:pk>/delete', views.DeleteMix.as_view(), name='mix-delete'),
     path('Mixtapes/<int:pk>/addSong', views.songAdd, name='song-add'),
     path('Mixtapes/<int:pk>/removeSong', views.songRemove, name='remove_song'),
-    path('reviews/<str:album_id>/add/', views.createReview, name='createReview')
+    path('reviews/<str:album_id>/add/', views.createReview, name='createReview'),
+    path('reviews/remove/<str:album_id>/<str:view>/<int:pk>/', views.DeleteReview.as_view(), name='deleteReview'),
 
 ]

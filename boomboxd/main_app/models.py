@@ -41,3 +41,7 @@ class Review(models.Model):
     fav = models.CharField()
     least = models.CharField()
     mention = models.CharField()
+
+    def get_absolute_url(self):
+        return reverse("album_detail", kwargs={"album_id": self.album})
+

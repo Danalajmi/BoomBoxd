@@ -1,0 +1,12 @@
+{% extends "view-mix.html" %}
+
+{% block confirm %}
+<h5>
+  Are you sure you want to delete this mixtape?
+</h5>
+<form action="" method="POST">
+  {% csrf_token %} <input type="submit" value="Yes - Delete!" class="mix-action" />
+  <a href="{% url 'mix-detail' object.id %}">Cancel</a>
+</form>
+
+{% endblock confirm %}

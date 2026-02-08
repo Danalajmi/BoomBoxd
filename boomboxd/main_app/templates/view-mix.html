@@ -6,6 +6,8 @@
 <div class="mix-actions">
   <a href="{% url 'mix-add' mixtape.id %}" class="mix-action">Add songs</a>
   <a href="{% url 'mix-update' mixtape.id %}" class="mix-action secondary">Edit title</a>
+  <a href="{% url 'mix-delete' mixtape.id %}" class="mix-action secondary">Delete mixtape</a>
+  {% block confirm %}{% endblock confirm %}
 </div>
 
 
@@ -25,7 +27,6 @@
   aria-label="remove song"
   value="{{ song.id }}"
   name="song_id"
-
   type="submit"
   class="remove-btn">−</button>
     </form>

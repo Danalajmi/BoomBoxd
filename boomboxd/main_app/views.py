@@ -175,3 +175,22 @@ def createReview(request, album_id):
         "reviews_form.html",
         {"album_id": album_id, "form": form, "albumTracks": albumTracks["items"]},
     )
+
+class DeleteReview(LoginRequiredMixin, DeleteView):
+    model = Review
+    template_name = 'delete_review.html'
+
+    def get(self, request, view, album_id, pk):
+
+        if view == 'profile':
+            return redirect('profile')
+        else:
+
+            return redirect('album_detail', album_id)
+
+
+class DeleteMix(LoginRequiredMixin, DeleteView):
+    model = Mixtape
+    template_name = 'mix_delete_confirm.html'
+
+    success_url = '/'
