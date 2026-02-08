@@ -67,10 +67,14 @@ def topTracks(request):
     return tracks["tracks"]["items"]
 
 
-@login_required
+
 def albumDetail(request, album_id):
     data = sp.album(album_id)
-    reviews = Review.objects.filter(album=album_id)
+    if request.user.is_authenticated:
+        reviews = Review.objects.filter(album=album_id)
+    else:
+        reviews = []
+
 
     return render(request, "album-detail.html", {"album": data, "reviews": reviews})
 

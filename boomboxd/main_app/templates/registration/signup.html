@@ -1,11 +1,43 @@
 {% extends "base.html" %}
 {% block content %}
-<form action="{%url 'signup'%}" method="POST">
-  {% csrf_token %}
-  {% comment %} TODO change this -- ugly {% endcomment %}
-  {{form.as_p}}
-  <input type="submit" value="Sign up" class="btn">
-</form>
+<div class="auth-wrapper">
+  <form action="{% url 'signup' %}" method="POST" class="auth-card">
+    {% csrf_token %}
+
+    <h1 class="auth-title">Sign up</h1>
+
+    <div class="auth-field">
+      <label for="{{ form.username.id_for_label }}">Username</label>
+      {{ form.username }}
+    </div>
+
+    {% if form.email %}
+    <div class="auth-field">
+      <label for="{{ form.email.id_for_label }}">Email</label>
+      {{ form.email }}
+    </div>
+    {% endif %}
+
+    <div class="auth-field">
+      <label for="{{ form.password1.id_for_label }}">Password</label>
+      {{ form.password1 }}
+    </div>
+
+    <div class="auth-field">
+      <label for="{{ form.password2.id_for_label }}">Confirm password</label>
+      {{ form.password2 }}
+    </div>
+
+    {% if form.errors %}
+      <div class="auth-error">
+        {{ form.errors }}
+      </div>
+    {% endif %}
+
+    <input type="submit" value="Create account" class="auth-submit">
+  </form>
+</div>
+
 
 {% endblock content %}
 
