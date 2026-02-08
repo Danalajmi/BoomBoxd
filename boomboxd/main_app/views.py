@@ -56,8 +56,8 @@ def home(request):
 @login_required
 def profile(request):
     mixtapes = Mixtape.objects.filter(creator=request.user)
-    reviews = Review.objects.filter(user = request.user)
-    return render(request, "profile.html", {"mixtapes": mixtapes, 'reviews': reviews})
+    reviews = Review.objects.filter(user=request.user)
+    return render(request, "profile.html", {"mixtapes": mixtapes, "reviews": reviews})
 
 
 def topTracks(request):
@@ -97,9 +97,10 @@ class createMixtape(LoginRequiredMixin, CreateView):
         form.instance.creator = self.request.user
         return super().form_valid(form)
 
+
 class updateMixtape(LoginRequiredMixin, UpdateView):
     model = Mixtape
-    fields = ['title']
+    fields = ["title"]
     template_name = "Mixtape_form.html"
 
 
@@ -121,9 +122,9 @@ class UpdateMix(LoginRequiredMixin, UpdateView):
     model = Mixtape
     fields = ["tracks"]
     template_name = "add_songs.html"
-    def get_success_url(self):
-        return reverse('mix-detail', pk=self.object.pk)
 
+    def get_success_url(self):
+        return reverse("mix-detail", pk=self.object.pk)
 
 
 def mixDetail(request, pk):
@@ -146,8 +147,9 @@ def songAdd(request, pk):
     #! duplicate key value violates unique constraint "main_app_song_pkey", line 118 returns None??
     return redirect("mix-detail", pk=mixTape.id)
 
+
 @login_required
-def songRemove(request,pk):
+def songRemove(request, pk):
     song_id = Song.objects.get(id=request.POST.get("song_id"))
 
     mixTape = Mixtape.objects.get(id=pk)
@@ -176,21 +178,24 @@ def createReview(request, album_id):
         {"album_id": album_id, "form": form, "albumTracks": albumTracks["items"]},
     )
 
+
 class DeleteReview(LoginRequiredMixin, DeleteView):
     model = Review
-    template_name = 'delete_review.html'
+    template_name = "review_delete_confirm.html"
 
-    def get(self, request, view, album_id, pk):
 
-        if view == 'profile':
-            return redirect('profile')
+
+    def get_success_url(self):
+
+        if self.kwargs.get('view') == "profile":
+            return redirect("profile")
         else:
 
-            return redirect('album_detail', album_id)
+            return reverse("album_detail", kwargs={'album_id': self.kwargs.get('album_id')})
 
 
 class DeleteMix(LoginRequiredMixin, DeleteView):
     model = Mixtape
-    template_name = 'mix_delete_confirm.html'
+    template_name = "mix_delete_confirm.html"
 
-    success_url = '/'
+    success_url = "/"

@@ -2,7 +2,7 @@
 {% block content %}
 
 <div class="review-form-wrapper">
-  <form action="{% url 'createReview' album_id %}" method="POST" class="review-form">
+  <form action="{% url 'create-review' album_id %}" method="POST" class="review-form">
     {% csrf_token %}
 
     <label>Rate the album</label>

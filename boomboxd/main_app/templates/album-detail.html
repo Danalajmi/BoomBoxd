@@ -27,7 +27,7 @@
   <div class="reviews-header">
     <h1>Thoughts</h1>
 
-    <a href="{% url 'createReview' album.id %}" class="primary-btn icon-btn">
+    <a href="{% url 'create-review' album.id %}" class="primary-btn icon-btn">
       <i class="material-icons">add</i>
     </a>
   </div>
@@ -38,8 +38,9 @@
 
       <div class="review-top">
         <p class="review-user">{{ review.user }}</p>
-        <a href="{%url 'deleteReview' album.id 'detail' review.id%}"><i class="material-icons">delete</i></a>
-        {% block confirm %}{% endblock confirm %}
+        <a href="{% url 'deleteReview' album.id 'detail' review.id%}"><i class="material-icons">delete</i>delete</a>
+  {% block confirm %}{% endblock confirm %}
+
         <span class="review-rating">{{ review.rating }}/5</span>
       </div>
 

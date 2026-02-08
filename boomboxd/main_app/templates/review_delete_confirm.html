@@ -1,4 +1,4 @@
-{% extends "album-detail.html" %}
+{% comment %} {% extends "album-detail.html" %} {% endcomment %}
 
 {% block confirm %}
 <h5>
@@ -6,7 +6,8 @@
 </h5>
 <form action="" method="POST">
   {% csrf_token %} <input type="submit" value="Yes - Delete!" class="btn" />
-  <a href="{% url 'album-detail' album_id %}">Cancel</a>
+  {% comment %} <a href="{% url 'album-detail' album_id %}">Cancel</a> {% endcomment %}
 </form>
 
 {% endblock confirm %}
+
