@@ -34,7 +34,7 @@ def signup(request):
         if form.is_valid():
             user = form.save()
             login(request, user)
-            return redirect("index")
+            return redirect("home")
         else:
             error_message = "Invalid signup - try again"
 
@@ -203,3 +203,9 @@ class DeleteMix(LoginRequiredMixin, DeleteView):
     template_name = "mix_delete_confirm.html"
 
     success_url = "/"
+
+
+
+class likeSong(LoginRequiredMixin, UpdateView):
+    model = Likes
+    success_url = '/'

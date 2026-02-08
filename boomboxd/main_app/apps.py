@@ -1,14 +1,14 @@
 from django.apps import AppConfig
+from django.db.models.signals import post_save
+
 
 
 class MainAppConfig(AppConfig):
-    name = 'main_app'
-
-
-class UserConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
-    name = 'users'
+    name = 'main_app'
 
     # add this
     def ready(self):
-        import users.signals
+        import main_app.signals
+
+

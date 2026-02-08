@@ -43,3 +43,6 @@ class Review(models.Model):
     mention = models.CharField()
 
 
+class Likes(models.Model):
+    user = models.OneToOneField(User, primary_key=True, on_delete=models.CASCADE)
+    songs = models.ManyToManyField(Song)
