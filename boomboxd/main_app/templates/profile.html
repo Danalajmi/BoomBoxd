@@ -21,10 +21,13 @@
     <div class="review-card">
 
       <div class="review-top">
-        <p class="review-user">{{ review.album }}</p>
-        <a href="{%url 'deleteReview' 'profile'%}">Delete review</a>
-        {% block confirm %}{% endblock confirm %}
+
         <span class="review-rating">{{ review.rating }}/5</span>
+        <a href="{%url 'deleteReview' 'review.album.id' 'profile' review.id %}"
+        class="delete-review"
+        aria-label="Delete review">
+        <i class="material-icons">delete</i>
+</a>
       </div>
 
 

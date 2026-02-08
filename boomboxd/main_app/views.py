@@ -188,7 +188,7 @@ class DeleteReview(LoginRequiredMixin, DeleteView):
     def get_success_url(self):
 
         if self.kwargs.get('view') == "profile":
-            return redirect("profile")
+            return reverse("profile")
         else:
 
             return reverse("album_detail", kwargs={'album_id': self.kwargs.get('album_id')})

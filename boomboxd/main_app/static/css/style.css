@@ -1174,3 +1174,253 @@ ul {
     0 0 0 2px rgba(255, 107, 107, 0.6),
     0 3px 0 #5b1e1e;
 }
+
+
+/* =========================
+   REVIEW TOP BAR
+========================= */
+
+.review-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* =========================
+   USER
+========================= */
+
+.review-user {
+  margin: 0;
+  font-size: 13px;
+  font-weight: 600;
+  color: #c9a6ff;
+}
+
+/* =========================
+   ACTIONS (RIGHT SIDE)
+========================= */
+
+.review-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+
+
+/* =========================
+   DELETE BUTTON
+========================= */
+
+.delete-review {
+  width: 26px;
+  height: 26px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  text-decoration: none;
+
+  background: linear-gradient(180deg, #ff6b6b, #c43d3d);
+  color: #120015;
+
+  border-radius: 8px;
+
+  box-shadow:
+    inset 0 1px 1px rgba(255, 255, 255, 0.25),
+    0 3px 0 #5b1e1e;
+
+  transition:
+    transform 0.12s ease,
+    box-shadow 0.12s ease,
+    filter 0.12s ease;
+}
+
+.delete-review i {
+  font-size: 18px;
+}
+
+.delete-review:hover {
+  filter: brightness(1.05);
+}
+
+.delete-review:active {
+  transform: translateY(2px);
+  box-shadow:
+    inset 0 2px 3px rgba(0, 0, 0, 0.5),
+    0 1px 0 #5b1e1e;
+}
+
+
+/* =========================
+   WRAPPER
+========================= */
+
+.delete-review-wrapper {
+  max-width: 520px;
+  margin: 60px auto;
+  padding: 0 16px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* =========================
+   REVIEW PREVIEW CARD
+========================= */
+
+.delete-review-card {
+  background: linear-gradient(180deg, #240028, #16001a);
+  border-radius: 14px;
+  padding: 16px;
+
+  box-shadow:
+    inset 0 1px 2px rgba(255, 255, 255, 0.1),
+    0 10px 25px rgba(0, 0, 0, 0.45);
+}
+
+/* =========================
+   TOP BAR
+========================= */
+
+.delete-review-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.delete-review-user {
+  margin: 0;
+  font-size: 13px;
+  font-weight: 600;
+  color: #c9a6ff;
+}
+
+.delete-review-rating {
+  font-size: 13px;
+  font-weight: 700;
+  color: #ff9adf;
+}
+
+/* =========================
+   CONTENT
+========================= */
+
+.delete-review-content {
+  margin: 10px 0;
+  font-size: 13px;
+  line-height: 1.4;
+  color: #f1b3ff;
+}
+
+/* =========================
+   TRACK INFO
+========================= */
+
+.delete-review-tracks p {
+  margin: 2px 0;
+  font-size: 12px;
+  color: #c9a6ff;
+}
+
+/* =========================
+   WARNING TEXT
+========================= */
+
+.delete-warning {
+  text-align: center;
+  font-size: 14px;
+  font-weight: 600;
+  color: #ff6b6b;
+  margin: 10px 0 0;
+}
+
+/* =========================
+   ACTIONS
+========================= */
+
+.delete-review-actions {
+  display: flex;
+  justify-content: center;
+  gap: 14px;
+}
+
+/* =========================
+   CONFIRM DELETE BUTTON
+========================= */
+
+.delete-confirm-btn {
+  border: none;
+  cursor: pointer;
+
+  padding: 10px 18px;
+  font-size: 13px;
+  font-weight: 700;
+
+  background: linear-gradient(180deg, #ff6b6b, #c43d3d);
+  color: #120015;
+
+  border-radius: 10px;
+
+  box-shadow:
+    inset 0 1px 1px rgba(255, 255, 255, 0.25),
+    0 4px 0 #5b1e1e;
+
+  transition:
+    transform 0.12s ease,
+    box-shadow 0.12s ease,
+    filter 0.12s ease;
+}
+
+.delete-confirm-btn:hover {
+  filter: brightness(1.05);
+}
+
+.delete-confirm-btn:active {
+  transform: translateY(2px);
+  box-shadow:
+    inset 0 2px 3px rgba(0, 0, 0, 0.5),
+    0 2px 0 #5b1e1e;
+}
+
+/* =========================
+   CANCEL LINK
+========================= */
+
+.delete-cancel-btn {
+  display: inline-flex;
+  align-items: center;
+
+  padding: 10px 18px;
+  font-size: 13px;
+  font-weight: 600;
+
+  text-decoration: none;
+  color: #c9a6ff;
+
+  border-radius: 10px;
+
+  background: #2a0030;
+  box-shadow:
+    inset 0 1px 1px rgba(255, 255, 255, 0.1),
+    0 3px 0 #140017;
+
+  transition:
+    transform 0.12s ease,
+    box-shadow 0.12s ease,
+    filter 0.12s ease;
+}
+
+.delete-cancel-btn:hover {
+  filter: brightness(1.1);
+}
+
+.delete-cancel-btn:active {
+  transform: translateY(2px);
+  box-shadow:
+    inset 0 2px 3px rgba(0, 0, 0, 0.5),
+    0 1px 0 #140017;
+}

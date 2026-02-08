@@ -34,25 +34,32 @@
 
   <div class="reviews-grid">
     {% for review in reviews %}
-    <div class="review-card">
+<div class="review-card">
 
-      <div class="review-top">
-        <p class="review-user">{{ review.user }}</p>
-        <a href="{% url 'deleteReview' album.id 'detail' review.id%}"><i class="material-icons">delete</i>delete</a>
-  {% block confirm %}{% endblock confirm %}
+  <div class="review-top">
+    <p class="review-user">{{ review.user }}</p>
 
-        <span class="review-rating">{{ review.rating }}/5</span>
-      </div>
+    <div class="review-actions">
+      <span class="review-rating">{{ review.rating }}/5</span>
 
-      <p class="review-content">{{ review.content }}</p>
+      <a href="{% url 'deleteReview' album.id 'detail' review.id %}"
+         class="delete-review"
+         aria-label="Delete review">
+        <i class="material-icons">delete</i>
+      </a>
+    </div> 
+  </div>
 
-      <div class="review-tracks">
-        <p><strong>Favourite:</strong> {{ review.fav }}</p>
-        <p><strong>Honourable mention:</strong> {{ review.mention }}</p>
-        <p><strong>Least:</strong> {{ review.least }}</p>
-      </div>
+  <p class="review-content">{{ review.content }}</p>
 
-    </div>
+  <div class="review-tracks">
+    <p><strong>Favourite:</strong> {{ review.fav }}</p>
+    <p><strong>Honourable mention:</strong> {{ review.mention }}</p>
+    <p><strong>Least:</strong> {{ review.least }}</p>
+  </div>
+
+</div>
+
     {% endfor %}
   </div>
 

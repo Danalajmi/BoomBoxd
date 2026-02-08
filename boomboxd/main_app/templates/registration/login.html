@@ -2,7 +2,6 @@
 {% block content %}
 <form action="{%url 'login'%}" method="POST">
   {% csrf_token %}
-  {% comment %} TODO change this -- ugly {% endcomment %}
   {{form.as_p}}
   <input type="submit" value="login" class="btn">
 </form>
