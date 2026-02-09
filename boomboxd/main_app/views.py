@@ -70,12 +70,14 @@ def topTracks(request):
 
 def albumDetail(request, album_id):
     data = sp.album(album_id)
+
     if request.user.is_authenticated:
         reviews = Review.objects.filter(album=album_id)
+        playlist = Likes.objects.get(user=request.user).songs.all()
+        liked_ids = {t.id for t in playlist}
     else:
         reviews = []
-
-    return render(request, "album-detail.html", {"album": data, "reviews": reviews})
+    return render(request, "album-detail.html", {"album": data, "reviews": reviews, 'liked': playlist, 'liked_ids': liked_ids})
 
 
 def searchTracks(query):

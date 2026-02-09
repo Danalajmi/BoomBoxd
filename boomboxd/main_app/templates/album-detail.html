@@ -5,27 +5,44 @@
 {% block content %}
 <div class="album-detail">
   <div class="album-meta">
-    <img src="{{album.images.0.url}}" alt="{{album.name}}">
-    <h1>{{album.name}}</h1>
-    <h4>{{album.artists.0.name}}</h4>
+    <img src="{{ album.images.0.url }}" alt="{{ album.name }}">
+    <h1>{{ album.name }}</h1>
+    <h4>{{ album.artists.0.name }}</h4>
+
   </div>
 
-  <form action="{%url 'LikeASong' 'album' %}" method="POST">
-    {% csrf_token %}
-    <div class="track-list">
-      {% for track in album.tracks.items %}
-      <div class="track-row">
+  <div class="album-tracks">
+    <form action="{% url 'LikeASong' 'album' %}" method="POST" class="track-form">
+      {% csrf_token %}
 
-        <p class="track-title">{{track.track_number}}. {{track.name}}</p>
+      <div class="track-list">
+        {% for track in album.tracks.items %}
+          <div class="track-row">
+            <p class="track-title">{{ track.track_number }}. {{ track.name }}</p>
 
-        <button value="{{track.id}}" name="song_id" class='primary-btn icon-btn'><i class="material-icons">favorite</i></button>
-        <p class="track-duration">{{track.duration_ms|ms_to_mins}}</p>
+            <div class="track-actions">
+              <button
+                class="track-like-btn {% if track.id in liked_ids %}is-liked{% endif %}"
+                type="submit"
+                name="song_id"
+                value="{{ track.id }}"
+                aria-label="{% if track.id in liked_ids %}Unlike{% else %}Like{% endif %}"
+              >
+                <i class="material-icons">
+                  {% if track.id in liked_ids %}heart_broken{% else %}favorite{% endif %}
+                </i>
+              </button>
+
+              <p class="track-duration">{{ track.duration_ms|ms_to_mins }}</p>
+            </div>
+          </div>
+        {% endfor %}
       </div>
 
-      {% endfor %}
-    </div>
-  </form>
+    </form>
+  </div>
 </div>
+
 
 <div class="reviews-section">
 
