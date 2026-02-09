@@ -22,6 +22,7 @@
     <div class="review-card">
 
       <div class="review-top">
+    <p class="review-user">{{ review.albumName }}</p>
 
         <span class="review-rating">{{ review.rating }}/5</span>
         <a href="{%url 'deleteReview' 'review.album.id' 'profile' review.id %}"

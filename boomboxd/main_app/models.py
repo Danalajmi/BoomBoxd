@@ -38,6 +38,7 @@ class Review(models.Model):
     rating = models.IntegerField(validators=[MinValueValidator(0), MaxValueValidator(5)])
     date = models.DateField(null=True, blank=True)
     album = models.ForeignKey(Album, on_delete=models.CASCADE, related_name='album', blank=True)
+    albumName = models.CharField(blank=True)
     fav = models.CharField()
     least = models.CharField()
     mention = models.CharField()

@@ -172,6 +172,7 @@ def createReview(request, album_id):
         if form.is_valid():
             review = form.save(commit=False)
             review.album, _ = Album.objects.get_or_create(id=album_id)
+            review.albumName = sp.album(album_id)['name']
             review.user = request.user
             review.date = timezone.now()
             review.save()

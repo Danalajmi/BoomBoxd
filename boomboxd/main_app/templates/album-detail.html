@@ -21,6 +21,7 @@
             <p class="track-title">{{ track.track_number }}. {{ track.name }}</p>
 
             <div class="track-actions">
+              <p class="track-duration">{{ track.duration_ms|ms_to_mins }}</p>
               <button
                 class="track-like-btn {% if track.id in liked_ids %}is-liked{% endif %}"
                 type="submit"
@@ -33,7 +34,6 @@
                 </i>
               </button>
 
-              <p class="track-duration">{{ track.duration_ms|ms_to_mins }}</p>
             </div>
           </div>
         {% endfor %}
@@ -64,12 +64,14 @@
 
     <div class="review-actions">
       <span class="review-rating">{{ review.rating }}/5</span>
+      {% if review.user == user %}
 
       <a href="{% url 'deleteReview' album.id 'detail' review.id %}"
          class="delete-review"
          aria-label="Delete review">
         <i class="material-icons">delete</i>
       </a>
+      {% endif %}
     </div>
   </div>
 
