@@ -24,5 +24,5 @@ urlpatterns = [
     path("reviews/<str:album_id>/add/", views.createReview, name="create-review"),
 
     path('LikedSongs/', views.listLiked, name='LikedSongs'),
-    path('LikeSong/', views.likeSong, name='LikeASong'),
+    path('LikeSong/<str:view>', views.likeSong, name='LikeASong'),
 ]

@@ -205,7 +205,7 @@ class DeleteMix(LoginRequiredMixin, DeleteView):
 
 
 @login_required
-def likeSong(request):
+def likeSong(request, view):
     song_id, _ = Song.objects.get_or_create(id=request.POST.get("song_id"))
     playlist = Likes.objects.get(user=request.user)
     if song_id in playlist.songs.all():
@@ -213,8 +213,10 @@ def likeSong(request):
     else:
         playlist.songs.add(song_id)
     album_id = sp.track(song_id.id)
-
-    return redirect('album_detail', album_id['album']['id'])
+    if view == 'profile':
+        return redirect('LikedSongs')
+    else:
+        return redirect('album_detail', album_id['album']['id'])
 
 
 def listLiked(request):

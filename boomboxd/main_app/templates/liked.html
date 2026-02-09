@@ -12,7 +12,7 @@
       <p>{{song.artists.0.name}}</p>
     </div>
 
-    <form action="{%url 'LikeASong'%}" method="POST">
+    <form action="{%url 'LikeASong' 'profile' %}" method="POST">
       {% csrf_token %}
       <button
   aria-label="remove song"

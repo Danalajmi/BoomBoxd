@@ -10,7 +10,7 @@
     <h4>{{album.artists.0.name}}</h4>
   </div>
 
-  <form action="{%url 'LikeASong' %}" method="POST">
+  <form action="{%url 'LikeASong' 'album' %}" method="POST">
     {% csrf_token %}
     <div class="track-list">
       {% for track in album.tracks.items %}
