@@ -212,8 +212,9 @@ def likeSong(request):
         playlist.songs.remove(song_id)
     else:
         playlist.songs.add(song_id)
+    album_id = sp.track(song_id.id)
 
-    return redirect("LikedSongs")
+    return redirect('album_detail', album_id['album']['id'])
 
 
 def listLiked(request):
