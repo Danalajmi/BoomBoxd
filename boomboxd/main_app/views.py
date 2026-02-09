@@ -58,7 +58,6 @@ def profile(request):
     mixtapes = Mixtape.objects.filter(creator=request.user)
     reviews = Review.objects.filter(user=request.user)
 
-
     return render(request, "profile.html", {"mixtapes": mixtapes, "reviews": reviews})
 
 
@@ -69,14 +68,12 @@ def topTracks(request):
     return tracks["tracks"]["items"]
 
 
-
 def albumDetail(request, album_id):
     data = sp.album(album_id)
     if request.user.is_authenticated:
         reviews = Review.objects.filter(album=album_id)
     else:
         reviews = []
-
 
     return render(request, "album-detail.html", {"album": data, "reviews": reviews})
 
@@ -189,15 +186,15 @@ class DeleteReview(LoginRequiredMixin, DeleteView):
     model = Review
     template_name = "review_delete_confirm.html"
 
-
-
     def get_success_url(self):
 
-        if self.kwargs.get('view') == "profile":
+        if self.kwargs.get("view") == "profile":
             return reverse("profile")
         else:
 
-            return reverse("album_detail", kwargs={'album_id': self.kwargs.get('album_id')})
+            return reverse(
+                "album_detail", kwargs={"album_id": self.kwargs.get("album_id")}
+            )
 
 
 class DeleteMix(LoginRequiredMixin, DeleteView):
@@ -210,18 +207,20 @@ class DeleteMix(LoginRequiredMixin, DeleteView):
 @login_required
 def likeSong(request):
     song_id, _ = Song.objects.get_or_create(id=request.POST.get("song_id"))
-    playlist = Likes.objects.get(user= request.user)
-    playlist.songs.add(song_id)
+    playlist = Likes.objects.get(user=request.user)
+    if song_id in playlist.songs.all():
+        playlist.songs.remove(song_id)
+    else:
+        playlist.songs.add(song_id)
 
     return redirect("LikedSongs")
 
 
 def listLiked(request):
-    playlist = Likes.objects.get(user = request.user)
+    playlist = Likes.objects.get(user=request.user)
 
-    songs = playlist.songs.filter(likes = request.user.id).values()
-    print(songs[0]['id'], 'here')
+    songs = playlist.songs.filter(likes=request.user.id).values()
     songList = []
     for song in songs:
-        songList.append(sp.track(song['id']))
-    return render(request, 'liked.html', {'songs': songList})
+        songList.append(sp.track(song["id"]))
+    return render(request, "liked.html", {"songs": songList})
