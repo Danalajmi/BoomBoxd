@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load time_filters %}
 {% block title %}{{album.title}}{% endblock title %}
 
 {% block content %}
@@ -18,8 +19,7 @@
         <p class="track-title">{{track.track_number}}. {{track.name}}</p>
 
         <button value="{{track.id}}" name="song_id"><i class="material-icons">favorite</i></button>
-        {% comment %} TODO shows in msec fix this {% endcomment %}
-        <p class="track-duration">{{track.duration_ms}}</p>
+        <p class="track-duration">{{track.duration_ms|ms_to_mins}}</p>
       </div>
 
       {% endfor %}
