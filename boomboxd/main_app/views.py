@@ -57,6 +57,8 @@ def home(request):
 def profile(request):
     mixtapes = Mixtape.objects.filter(creator=request.user)
     reviews = Review.objects.filter(user=request.user)
+
+
     return render(request, "profile.html", {"mixtapes": mixtapes, "reviews": reviews})
 
 
@@ -205,7 +207,21 @@ class DeleteMix(LoginRequiredMixin, DeleteView):
     success_url = "/"
 
 
+@login_required
+def likeSong(request):
+    song_id, _ = Song.objects.get_or_create(id=request.POST.get("song_id"))
+    playlist = Likes.objects.get(user= request.user)
+    playlist.songs.add(song_id)
 
-class likeSong(LoginRequiredMixin, UpdateView):
-    model = Likes
-    success_url = '/'
+    return redirect("LikedSongs")
+
+
+def listLiked(request):
+    playlist = Likes.objects.get(user = request.user)
+
+    songs = playlist.songs.filter(likes = request.user.id).values()
+    print(songs[0]['id'], 'here')
+    songList = []
+    for song in songs:
+        songList.append(sp.track(song['id']))
+    return render(request, 'liked.html', {'songs': songList})

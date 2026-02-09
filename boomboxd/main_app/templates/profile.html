@@ -5,6 +5,7 @@
   {%csrf_token%}
   <button type="submit" class="primary-btn">Log out</button>
 </form>
+<h1 class="title"><a href="{%url 'LikedSongs'%}">Liked songs</a></h1>
 <h1 class="title">My awesome mixtapes</h1>
 {% include "mixtapes_list.html" %}
 <div class="reviews-section">

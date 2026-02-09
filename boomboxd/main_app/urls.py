@@ -22,4 +22,7 @@ urlpatterns = [
         name="deleteReview",
     ),
     path("reviews/<str:album_id>/add/", views.createReview, name="create-review"),
+
+    path('LikedSongs/', views.listLiked, name='LikedSongs'),
+    path('LikeSong/', views.likeSong, name='LikeASong'),
 ]

@@ -9,17 +9,22 @@
     <h4>{{album.artists.0.name}}</h4>
   </div>
 
-  <div class="track-list">
-    {% for track in album.tracks.items %}
-    <div class="track-row">
+  <form action="{%url 'LikeASong' %}" method="POST">
+    {% csrf_token %}
+    <div class="track-list">
+      {% for track in album.tracks.items %}
+      <div class="track-row">
 
-      <p class="track-title">{{track.track_number}}. {{track.name}}</p>
-      {% comment %} TODO shows in msec fix this {% endcomment %}
-      <p class="track-duration">{{track.duration_ms}}</p>
+        <p class="track-title">{{track.track_number}}. {{track.name}}</p>
+
+        <button value="{{track.id}}" name="song_id"><i class="material-icons">favorite</i></button>
+        {% comment %} TODO shows in msec fix this {% endcomment %}
+        <p class="track-duration">{{track.duration_ms}}</p>
+      </div>
+
+      {% endfor %}
     </div>
-
-    {% endfor %}
-  </div>
+  </form>
 </div>
 
 <div class="reviews-section">
