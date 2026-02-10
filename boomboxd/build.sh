@@ -3,6 +3,6 @@ set -o errexit
 
 pip install -r ./boomboxd/requirements.txt
 
-python manage.py collectstatic --no-input
+python ./boomboxd/manage.py collectstatic --no-input
 
-python manage.py migrate
+python ./boomboxd/manage.py migrate
