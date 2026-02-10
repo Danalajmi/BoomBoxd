@@ -22,7 +22,7 @@ import requests
 
 sp = spotipy.Spotify(
     auth_manager=SpotifyClientCredentials(
-        client_id=CLIENT_ID, client_secret=CLIENT_SECRET
+        client_id=os.getenv('CLIENT_ID'), client_secret=os.getenv('CLIENT_SECRET')
     )
 )
 
