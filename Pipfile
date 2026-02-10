@@ -10,8 +10,11 @@ djangorestframework = "*"
 spotipy = "*"
 django-mathfilters = "*"
 psycopg2-binary = "*"
-dj-database-url = "*"
 django = "*"
+dj-database-url = "*"
+whitenoise = {extras = ["brotli"], version = "*"}
+gunicorn = "*"
+uvicorn = "*"
 
 [dev-packages]
 
