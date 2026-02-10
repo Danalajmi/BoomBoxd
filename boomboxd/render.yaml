@@ -21,7 +21,12 @@ services:
       - key: WEB_CONCURRENCY
         value: 4
       - key: CLIENT_ID
+        value: ${CLIENT_ID}
       - key : CLIENT_SECRET
+        value: ${CLIENT_SECRET}
       - key: REDIRECT_URI
+        value: ${REDIRECT_URI}
       - key: DATABASE_USER
+        value: ${DATABASE_USER}
       - key: DATABASE_NAME
+        value: ${DATABASE_NAME}
