@@ -4,12 +4,14 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-psycopg2-binary = "*"
 python-dotenv = "*"
-django = "*"
 requests = "*"
 djangorestframework = "*"
 spotipy = "*"
+django-mathfilters = "*"
+psycopg2-binary = "*"
+dj-database-url = "*"
+django = "*"
 
 [dev-packages]
 
