@@ -39,7 +39,9 @@ def signup(request):
             error_message = "Invalid signup - try again"
 
     form = UserCreationForm()
-    context = {"form": form, "error_message": error_message}
+    profileForm = ProfileForm()
+
+    context = {"form": form, "error_message": error_message, 'profileForm': profileForm}
     return render(request, "registration/signup.html", context)
 
 
@@ -144,13 +146,13 @@ def mixDetail(request, pk):
 
 @login_required
 def songAdd(request, pk):
-    song_id, _ = Song.objects.get_or_create(id=request.POST.get("song_id"))
     mixTape = Mixtape.objects.get(id=pk)
-    mixTape.tracks.add(song_id)
+    if request.POST:
+        song_id, _ = Song.objects.get_or_create(id=request.POST.get("song_id"))
+        mixTape.tracks.add(song_id)
+        return redirect('song-add', pk = mixTape.id)
 
-    # TODO: change to this: return redirect('song-add', pk = mixTape.id) raises err idk why
-    #! duplicate key value violates unique constraint "main_app_song_pkey", line 118 returns None??
-    return redirect("mix-detail", pk=mixTape.id)
+    return render(request, 'add_songs.html', {'mix_id': mixTape.id})
 
 
 @login_required

@@ -2,6 +2,7 @@
 {% extends "base.html" %}
 {% block content %}
 
+<a href="{%url 'mix-detail' mix_id%}" class="primary-btn">View mixtape</a>
 <!-- Search Songs -->
   <form action="{% url 'mix-add' mix_id %}" method="POST" class="search-form">
     {% csrf_token %}

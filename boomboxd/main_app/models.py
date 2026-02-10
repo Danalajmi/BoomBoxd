@@ -3,13 +3,14 @@ from django.contrib.auth.models import User
 from django.urls import reverse
 from django.core.validators import MinValueValidator, MaxValueValidator
 
+Pronouns = (('S', "She/Her"), ('H', "He/Him"), ('T', "They/Them"))
 
 # Create your models here.
 class Profile(models.Model):
     user = models.OneToOneField(User,related_name='profile', on_delete=models.CASCADE)
     avatar = models.ImageField(default='main_app/static/profile_images/default.jpg', upload_to='main_app/static/profile_images/')
     bio = models.TextField()
-
+    pronouns = models.CharField(max_length=2, choices=Pronouns)
     def __str__(self):
         return self.user.username
 
@@ -25,7 +26,7 @@ class Mixtape(models.Model):
     tracks = models.ManyToManyField(Song)
 
     def get_absolute_url(self):
-        return reverse("mix-add", kwargs={"pk": self.pk})
+        return reverse("mix-detail", kwargs={"pk": self.pk})
 
 class Album(models.Model):
     id = models.CharField(primary_key=True)

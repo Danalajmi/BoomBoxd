@@ -1,11 +1,22 @@
-{% extends "base.html" %} {% block content %}
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
 
 <h1>{{user}}</h1>
 <form action="{%url 'logout' %}" method="POST">
   {%csrf_token%}
   <button type="submit" class="primary-btn">Log out</button>
 </form>
-<h1 class="title"><a href="{%url 'LikedSongs'%}">Liked songs</a></h1>
+
+
+<div class="mixtape-grid">
+<a href="{%url 'LikedSongs'%}">
+      <div class="mixtape-card">
+    <img src="{% static 'logo-img.png' %}" alt="boombox">
+    <h3>Liked Tracks</h3>
+      </div>
+</a>
+</div>
 <h1 class="title">My awesome mixtapes</h1>
 {% include "mixtapes_list.html" %}
 <div class="reviews-section">

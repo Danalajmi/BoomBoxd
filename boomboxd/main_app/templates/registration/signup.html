@@ -28,13 +28,14 @@
       {{ form.password2 }}
     </div>
 
-    {% if form.errors %}
+
+    {{profileForm}}
+    <input type="submit" value="Create account" class="auth-submit">
+    {% if error_message %}
       <div class="auth-error">
-        {{ form.errors }}
+        {{ error_message }}
       </div>
     {% endif %}
-
-    <input type="submit" value="Create account" class="auth-submit">
   </form>
 </div>
 
