@@ -5,7 +5,7 @@ from django.db.models.signals import post_save
 
 class MainAppConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
-    name = 'boomboxd.main_app'
+    name = 'main_app'
 
     # add this
     def ready(self):
