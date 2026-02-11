@@ -1,5 +1,5 @@
 from django.forms import ModelForm
-from .models import *
+from boomboxd.main_app.models import *
 
 class ReviewForm(ModelForm):
     class Meta:

@@ -10,7 +10,7 @@ services:
     name: booomboxd
     runtime: python
     buildCommand: "./boomboxd/build.sh"
-    startCommand: "python -m gunicorn boomboxd.asgi:application -k uvicorn.workers.UvicornWorker"
+    startCommand: "python -m gunicorn ./boomboxd.boomboxd.asgi:application -k uvicorn.workers.UvicornWorker"
     envVars:
       - key: DATABASE_URL
         fromDatabase:
