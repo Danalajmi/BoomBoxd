@@ -8,8 +8,8 @@ from django.views.generic import ListView, DetailView
 from django.urls import reverse, reverse_lazy
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.utils import timezone
-from boomboxd.main_app.models import *
-from boomboxd.main_app.forms import *
+from .models import *
+from .forms import *
 import os
 import spotipy
 from spotipy.oauth2 import SpotifyOAuth, SpotifyClientCredentials

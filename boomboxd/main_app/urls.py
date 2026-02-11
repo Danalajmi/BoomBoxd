@@ -1,7 +1,6 @@
 from django.contrib import admin
 from django.urls import path, include
-from boomboxd.main_app import views
-
+from .views import views
 
 urlpatterns = [
     path("", views.home, name="home"),

@@ -9,6 +9,6 @@ class MainAppConfig(AppConfig):
 
     # add this
     def ready(self):
-        import boomboxd.main_app.signals
+        import main_app.signals
 
 
