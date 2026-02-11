@@ -56,7 +56,7 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
 
-ROOT_URLCONF = "boomboxd.main_app.urls"
+ROOT_URLCONF = "boomboxd.urls"
 
 TEMPLATES = [
     {
