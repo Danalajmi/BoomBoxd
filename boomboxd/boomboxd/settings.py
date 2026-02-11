@@ -30,7 +30,7 @@ SECRET_KEY = "django-insecure--43xee#0*m@3b(bx&3fdf12-68$hv*310)0dp6(%b^vrk!_528
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['https://booomboxd.onrender.com/']
 
 
 # Application definition
